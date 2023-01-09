@@ -4,14 +4,14 @@ Python client using native urllib HTTP client
 
 The official API client and SDK built by [NeutrinoAPI](https://www.neutrinoapi.com/)
 
-| Feature          |       |
-|------------------|-------|
-| Platform Version | >= 3  |
-| HTTP Library     |       |
-| JSON Library     |       |
-| HTTP/2           | false |
-| HTTP/3           | false |
-| CodeGen Version  | 4.6.8 |
+| Feature          |        |
+|------------------|--------|
+| Platform Version | >= 3   |
+| HTTP Library     | Native |
+| JSON Library     | Native |
+| HTTP/2           | No     |
+| HTTP/3           | No     |
+| CodeGen Version  | 4.6.10 |
 
 ## Getting started
 

@@ -54,7 +54,7 @@ if response.is_ok():
     print("locations:", end=None)
     for item in data.get("locations"):
 
-        # The fully formatted address
+        # The complete address using comma-separated values
         print("    address:", "'{0}'".format(item.get("address")))
 
         # The components which make up the address such as road, city, state, etc
@@ -98,8 +98,14 @@ if response.is_ok():
         # The location longitude
         print("    longitude:", item.get("longitude"))
 
+        # The formatted address using local standards suitable for printing on an envelope
+        print("    postal-address:", "'{0}'".format(item.get("postal-address")))
+
         # The postal code for the location
         print("    postal-code:", "'{0}'".format(item.get("postal-code")))
+
+        # The ISO 3166-2 region code for the location
+        print("    region-code:", "'{0}'".format(item.get("region-code")))
 
         # The state of the location
         print("    state:", "'{0}'".format(item.get("state")))

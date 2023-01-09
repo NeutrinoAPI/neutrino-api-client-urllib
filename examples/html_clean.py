@@ -16,7 +16,8 @@ params = {
     # allows many more common HTML tags like table, ul, dl, pre
     "output_type": "plain-text",
 
-    # The HTML content. This can be either a URL to load from, a file upload or an HTML content string
+    # The HTML content. This can be either a URL to load from, a file upload (multipart/form-data) or an
+    # HTML content string
     "content": "<div>Some HTML to clean...</div><script>alert()</script>"
 }
 response = client.html_clean(params, output_file_path)

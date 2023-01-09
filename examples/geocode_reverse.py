@@ -30,7 +30,7 @@ if response.is_ok():
     data = response.data
     print("API Response OK:")
 
-    # The fully formatted address
+    # The complete address using comma-separated values
     print("address:", "'{0}'".format(data.get("address")))
 
     # The components which make up the address such as road, city, state, etc
@@ -77,8 +77,14 @@ if response.is_ok():
     # The location longitude
     print("longitude:", data.get("longitude"))
 
+    # The formatted address using local standards suitable for printing on an envelope
+    print("postal-address:", "'{0}'".format(data.get("postal-address")))
+
     # The postal code for the location
     print("postal-code:", "'{0}'".format(data.get("postal-code")))
+
+    # The ISO 3166-2 region code for the location
+    print("region-code:", "'{0}'".format(data.get("region-code")))
 
     # The state of the location
     print("state:", "'{0}'".format(data.get("state")))
