@@ -1,6 +1,6 @@
 """Python client using native urllib HTTP client"""
 
-__version__ = '4.6.10'
+__version__ = '4.6.11'
 
 from socket import timeout
 from ssl import SSLError
@@ -160,6 +160,30 @@ class NeutrinoAPIClient:
             Neutrino API response object
         """
         return self.exec_request("GET", "convert", params, None, 10)
+
+    def domain_lookup(self, params) -> APIResponse:
+        """
+        Retrieve domain name details and detect potentially malicious or dangerous domains
+
+        The parameters this API accepts are:
+        * host - A domain name
+        * live - For domains that we have never seen before then perform various live checks and realtime reconnaissance
+
+        Link
+        ----
+        https://www.neutrinoapi.com/api/domain-lookup
+
+        Parameters
+        ----------
+        params: dict
+            String key-value pairs
+
+        Returns
+        -------
+        APIResponse
+            Neutrino API response object
+        """
+        return self.exec_request("GET", "domain-lookup", params, None, 120)
 
     def email_validate(self, params) -> APIResponse:
         """
