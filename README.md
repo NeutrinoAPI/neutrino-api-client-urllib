@@ -11,7 +11,7 @@ The official API client and SDK built by [NeutrinoAPI](https://www.neutrinoapi.c
 | JSON Library     | Native |
 | HTTP/2           | No     |
 | HTTP/3           | No     |
-| CodeGen Version  | 4.6.11 |
+| CodeGen Version  | 4.6.12 |
 
 ## Getting started
 
@@ -27,9 +27,9 @@ client = NeutrinoAPIClient("<USER_ID>", "<API_KEY>")
 ## Running Examples
 
 ```sh
-$ python3 -m "examples.ip_info"
+$ python3 -m neutrino_api.examples.ip_info
 ```
-You can find examples of all APIs in _examples/_
+You can find examples of all APIs in _neutrino_api/examples/_
 
 ## For Support 
 [Contact us](https://www.neutrinoapi.com/contact-us/)

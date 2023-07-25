@@ -35,6 +35,9 @@ params = {
     # the TTL then error code 14 will be returned
     "limit": "10",
 
+    # Set a custom brand or product name in the verification message
+    "brand_name": "",
+
     # Set the TTL in number of days that the 'limit' option will remember a phone number (the default is
     # 1 day and the maximum is 365 days)
     "limit_ttl": "1"

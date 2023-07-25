@@ -76,6 +76,10 @@ params = {
     # The document bottom margin (in mm)
     "margin_bottom": "0",
 
+    # For image rendering set the background color in hexadecimal notation (e.g. #0000ff). For PNG
+    # output the special value of 'transparent' can be used to create a transparent PNG
+    "bg_color": "",
+
     # Set the document to landscape orientation
     "landscape": "false"
 }
