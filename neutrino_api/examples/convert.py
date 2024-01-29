@@ -21,6 +21,12 @@ if response.is_ok():
     data = response.data
     print("API Response OK:")
 
+    # The full name of the type being converted from
+    print("from-name:", "'{0}'".format(data.get("from-name")))
+
+    # The standard UTF-8 symbol used to represent the type being converted from
+    print("from-symbol:", "'{0}'".format(data.get("from-symbol")))
+
     # The type of the value being converted from
     print("from-type:", "'{0}'".format(data.get("from-type")))
 
@@ -32,6 +38,12 @@ if response.is_ok():
 
     # The result of the conversion as a floating-point number
     print("result-float:", data.get("result-float"))
+
+    # The full name of the type being converted to
+    print("to-name:", "'{0}'".format(data.get("to-name")))
+
+    # The standard UTF-8 symbol used to represent the type being converted to
+    print("to-symbol:", "'{0}'".format(data.get("to-symbol")))
 
     # The type being converted to
     print("to-type:", "'{0}'".format(data.get("to-type")))

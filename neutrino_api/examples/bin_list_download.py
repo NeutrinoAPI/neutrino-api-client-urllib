@@ -15,7 +15,14 @@ params = {
 
     # Include 8-digit and higher BIN codes. This option includes all 6-digit BINs and all 8-digit and
     # higher BINs (including some 9, 10 and 11 digit BINs where available)
-    "include_8digit": "false"
+    "include_8digit": "false",
+
+    # Include all BINs and all available fields in the CSV file (overrides any values set for
+    # 'include-iso3' or 'include-8digit')
+    "include_all": "false",
+
+    # Set this option to 'gzip' to have the output file compressed using gzip
+    "output_encoding": ""
 }
 response = client.bin_list_download(params, output_file_path)
 if response.is_ok():
