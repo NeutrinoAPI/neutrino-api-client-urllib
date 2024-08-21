@@ -89,7 +89,7 @@ if response.is_ok():
     # The state of the location
     print("state:", "'{0}'".format(data.get("state")))
 
-    # Map containing timezone details
+    # Structure of a valid ip-info -> timezone response
     print("timezone:", data.get("timezone"))
 else:
     print("API Error: {0}, Error Code: {1}, HTTP Status Code: {2}".format(response.error_message, response.error_code, response.status_code), file=sys.stderr)

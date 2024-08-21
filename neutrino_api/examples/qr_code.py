@@ -9,6 +9,9 @@ output_file_path = tempfile.mkstemp(suffix=".png", prefix="qr-code-")[1]
 client = NeutrinoAPIClient("<your-user-id>", "<your-api-key>")
 params = {
 
+    # The barcode format to output. Accepted formats are: qr, c128
+    "code_format": "qr",
+
     # The width of the QR code (in px)
     "width": "256",
 

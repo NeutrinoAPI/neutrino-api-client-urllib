@@ -44,9 +44,25 @@ if response.is_ok():
     # The complete raw, decompressed and decoded page content. Usually will be either HTML, JSON or XML
     print("content:", "'{0}'".format(data.get("content")))
 
-    # Array containing all the elements matching the supplied selector. Each element object will contain
-    # the text content, HTML content and all current element attributes
-    print("elements:", data.get("elements"))
+    # Array containing all the elements matching the supplied selector
+    print("elements:", end=None)
+    for item in data.get("elements"):
+
+        # The 'class' attribute of the element
+        print("    class:", "'{0}'".format(item.get("class")))
+
+        # The 'href' attribute of the element
+        print("    href:", "'{0}'".format(item.get("href")))
+
+        # The raw HTML of the element
+        print("    html:", "'{0}'".format(item.get("html")))
+
+        # The 'id' attribute of the element
+        print("    id:", "'{0}'".format(item.get("id")))
+
+        # The plain-text content of the element with normalized whitespace
+        print("    text:", "'{0}'".format(item.get("text")))
+        print("")
 
     # Contains the error message if an error has occurred ('is-error' will be true)
     print("error-message:", "'{0}'".format(data.get("error-message")))

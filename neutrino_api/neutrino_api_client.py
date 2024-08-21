@@ -1,6 +1,6 @@
-"""Python client using native urllib HTTP client"""
+"""Neutrino API Python client using native urllib HTTP library"""
 
-__version__ = '4.6.13'
+__version__ = '4.6.15'
 
 from socket import timeout
 from ssl import SSLError
@@ -16,10 +16,10 @@ from neutrino_api.api_error_code import APIErrorCode
 from neutrino_api.api_response import APIResponse
 
 # Servers
-MULTICLOUD_ENDPOINT = "https://neutrinoapi.net/"
-AWS_ENDPOINT = "https://aws.neutrinoapi.net/"
-GCP_ENDPOINT = "https://gcp.neutrinoapi.net/"
-MS_AZURE_ENDPOINT = "https://msa.neutrinoapi.net/"
+Multicloud = "https://neutrinoapi.net/"
+AWS = "https://aws.neutrinoapi.net/"
+GCP = "https://gcp.neutrinoapi.net/"
+Backup = "https://neutrinoapi.com/"
 
 
 class NeutrinoAPIClient:
@@ -27,7 +27,7 @@ class NeutrinoAPIClient:
     Make a request to the Neutrino API
     """
 
-    def __init__(self, user_id, api_key, base_url=MULTICLOUD_ENDPOINT) -> None:
+    def __init__(self, user_id, api_key, base_url=Multicloud) -> None:
         self.user_id = user_id
         self.api_key = api_key
         self.base_url = base_url
@@ -373,29 +373,31 @@ class NeutrinoAPIClient:
         Render HTML content to PDF, JPG or PNG
 
         The parameters this API accepts are:
-        * margin - The document margin (in mm)
         * css - Inject custom CSS into the HTML
-        * image-width - If rendering to an image format (PNG or JPG) use this image width (in pixels)
         * footer - The footer HTML to insert into each page
-        * format - Which format to output
-        * zoom - Set the zoom factor when rendering the page (2.0 for double size
         * title - The document title
         * content - The HTML content
         * page-width - Set the PDF page width explicitly (in mm)
         * timeout - Timeout in seconds
-        * margin-right - The document right margin (in mm)
         * grayscale - Render the final document in grayscale
         * margin-left - The document left margin (in mm)
         * page-size - Set the document page size
-        * delay - Number of seconds to wait before rendering the page (can be useful for pages with animations etc)
         * ignore-certificate-errors - Ignore any TLS/SSL certificate errors
         * page-height - Set the PDF page height explicitly (in mm)
+        * margin-top - The document top margin (in mm)
+        * bg-color - For image rendering set the background color in hexadecimal notation (e.g. #0000ff)
+        * margin - The document margin (in mm)
+        * image-width - If rendering to an image format (PNG or JPG) use this image width (in pixels)
+        * format - Which format to output
+        * zoom - Set the zoom factor when rendering the page (2.0 for double size
+        * margin-right - The document right margin (in mm)
+        * delay - Number of seconds to wait before rendering the page (can be useful for pages with animations etc)
         * image-height - If rendering to an image format (PNG or JPG) use this image height (in pixels)
         * header - The header HTML to insert into each page
-        * margin-top - The document top margin (in mm)
         * margin-bottom - The document bottom margin (in mm)
-        * bg-color - For image rendering set the background color in hexadecimal notation (e.g. #0000ff)
         * landscape - Set the document to landscape orientation
+        * exec - Execute JavaScript on the website
+        * user-agent - Override the browsers default user-agent string with this one
 
         Link
         ----
@@ -537,7 +539,7 @@ class NeutrinoAPIClient:
         Get location information about an IP address and do reverse DNS (PTR) lookups
 
         The parameters this API accepts are:
-        * ip - IPv4 or IPv6 address
+        * ip - An IPv4 or IPv6 address
         * reverse-lookup - Do a reverse DNS (PTR) lookup
 
         Link
@@ -561,7 +563,7 @@ class NeutrinoAPIClient:
         Execute a realtime network probe against an IPv4 or IPv6 address
 
         The parameters this API accepts are:
-        * ip - IPv4 or IPv6 address
+        * ip - An IPv4 or IPv6 address
 
         Link
         ----
@@ -665,6 +667,7 @@ class NeutrinoAPIClient:
         Generate a QR code as a PNG image
 
         The parameters this API accepts are:
+        * code-format - The barcode format to output
         * width - The width of the QR code (in px)
         * fg-color - The QR code foreground color
         * bg-color - The QR code background color

@@ -7,7 +7,7 @@ from neutrino_api.neutrino_api_client import *
 client = NeutrinoAPIClient("<your-user-id>", "<your-api-key>")
 params = {
 
-    # IPv4 or IPv6 address
+    # An IPv4 or IPv6 address. Accepts standard IP notation and also CIDR notation
     "ip": "194.233.98.38"
 }
 response = client.ip_probe(params)
@@ -60,7 +60,7 @@ if response.is_ok():
     # The IPs full hostname (PTR)
     print("hostname:", "'{0}'".format(data.get("hostname")))
 
-    # The IP address
+    # The IPv4 or IPv6 address returned
     print("ip:", "'{0}'".format(data.get("ip")))
 
     # True if this is a bogon IP address such as a private network, local network or reserved address
@@ -74,7 +74,7 @@ if response.is_ok():
     # the provider type is VPN/proxy, this occurs in the case that the IP is detected as both types
     print("is-isp:", data.get("is-isp"))
 
-    # True if this IP ia a proxy
+    # True if this IP is a proxy
     print("is-proxy:", data.get("is-proxy"))
 
     # True if this is a IPv4 mapped IPv6 address

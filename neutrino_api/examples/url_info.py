@@ -51,7 +51,7 @@ if response.is_ok():
     print("http-status:", data.get("http-status"))
 
     # The HTTP status message assoicated with the status code
-    print("http-status-message:", data.get("http-status-message"))
+    print("http-status-message:", "'{0}'".format(data.get("http-status-message")))
 
     # True if an error occurred while loading the URL. This includes network errors, TLS errors and
     # timeouts

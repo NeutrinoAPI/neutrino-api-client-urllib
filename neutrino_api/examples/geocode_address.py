@@ -110,7 +110,7 @@ if response.is_ok():
         # The state of the location
         print("    state:", "'{0}'".format(item.get("state")))
 
-        # Map containing timezone details
+        # Structure of a valid ip-info -> timezone response
         print("    timezone:", item.get("timezone"))
         print("")
 else:
