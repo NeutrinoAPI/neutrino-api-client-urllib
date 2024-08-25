@@ -67,7 +67,7 @@ if response.is_ok():
     # ISO 3166-2 region code (if detectable)
     print("region-code:", "'{0}'".format(data.get("region-code")))
 
-    # Structure of a valid ip-info -> timezone response
+    # Structure of a ip-info -> timezone response
     print("timezone:", data.get("timezone"))
 
     # True if this is a valid IPv4 or IPv6 address

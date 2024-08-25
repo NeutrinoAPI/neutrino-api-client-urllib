@@ -1,6 +1,6 @@
 """Neutrino API Python client using native urllib HTTP library"""
 
-__version__ = '4.6.15'
+__version__ = '4.6.16'
 
 from socket import timeout
 from ssl import SSLError
@@ -16,10 +16,10 @@ from neutrino_api.api_error_code import APIErrorCode
 from neutrino_api.api_response import APIResponse
 
 # Servers
-Multicloud = "https://neutrinoapi.net/"
-AWS = "https://aws.neutrinoapi.net/"
-GCP = "https://gcp.neutrinoapi.net/"
-Backup = "https://neutrinoapi.com/"
+MULTICLOUD_ENDPOINT = "https://neutrinoapi.net/"
+AWS_ENDPOINT = "https://aws.neutrinoapi.net/"
+GCP_ENDPOINT = "https://gcp.neutrinoapi.net/"
+BACKUP_ENDPOINT = "https://neutrinoapi.com/"
 
 
 class NeutrinoAPIClient:
@@ -27,7 +27,7 @@ class NeutrinoAPIClient:
     Make a request to the Neutrino API
     """
 
-    def __init__(self, user_id, api_key, base_url=Multicloud) -> None:
+    def __init__(self, user_id, api_key, base_url=MULTICLOUD_ENDPOINT) -> None:
         self.user_id = user_id
         self.api_key = api_key
         self.base_url = base_url

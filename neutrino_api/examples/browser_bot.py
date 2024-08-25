@@ -44,6 +44,9 @@ if response.is_ok():
     # The complete raw, decompressed and decoded page content. Usually will be either HTML, JSON or XML
     print("content:", "'{0}'".format(data.get("content")))
 
+    # The size of the returned content in bytes
+    print("content-size:", data.get("content-size"))
+
     # Array containing all the elements matching the supplied selector
     print("elements:", end=None)
     for item in data.get("elements"):
@@ -68,7 +71,15 @@ if response.is_ok():
     print("error-message:", "'{0}'".format(data.get("error-message")))
 
     # If you executed any JavaScript this array holds the results as objects
-    print("exec-results:", data.get("exec-results"))
+    print("exec-results:", end=None)
+    for item in data.get("exec-results"):
+
+        # The result of the executed JavaScript statement. Will be empty if the statement returned nothing
+        print("    result:", "'{0}'".format(item.get("result")))
+
+        # The JavaScript statement that was executed
+        print("    statement:", "'{0}'".format(item.get("statement")))
+        print("")
 
     # The redirected URL if the URL responded with an HTTP redirect
     print("http-redirect-url:", "'{0}'".format(data.get("http-redirect-url")))
@@ -111,14 +122,24 @@ if response.is_ok():
     # Map containing details of the TLS/SSL setup
     print("security-details:", data.get("security-details"))
 
+    # The HTTP servers hostname (PTR/RDNS record)
+    print("server-hostname:", "'{0}'".format(data.get("server-hostname")))
+
     # The HTTP servers IP address
     print("server-ip:", "'{0}'".format(data.get("server-ip")))
 
     # The document title
     print("title:", "'{0}'".format(data.get("title")))
 
-    # The page URL
+    # The requested URL. This may not be the same as the final destination URL, if the URL redirects
+    # then it will be set in 'http-redirect-url' and 'is-http-redirect' will also be true
     print("url:", "'{0}'".format(data.get("url")))
+
+    # Structure of a browser-bot -> url-components response
+    print("url-components:", data.get("url-components"))
+
+    # True if the URL supplied is valid
+    print("url-valid:", data.get("url-valid"))
 else:
     print("API Error: {0}, Error Code: {1}, HTTP Status Code: {2}".format(response.error_message, response.error_code, response.status_code), file=sys.stderr)
     if response.error_cause:
