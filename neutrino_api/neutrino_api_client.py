@@ -1,6 +1,6 @@
 """Neutrino API Python client using native urllib HTTP library"""
 
-__version__ = '4.6.16'
+__version__ = '4.7.1'
 
 from socket import timeout
 from ssl import SSLError
@@ -20,6 +20,9 @@ MULTICLOUD_ENDPOINT = "https://neutrinoapi.net/"
 AWS_ENDPOINT = "https://aws.neutrinoapi.net/"
 GCP_ENDPOINT = "https://gcp.neutrinoapi.net/"
 BACKUP_ENDPOINT = "https://neutrinoapi.com/"
+EU_GEOFENCE_ENDPOINT = "https://eu.neutrinoapi.net/"
+AU_GEOFENCE_ENDPOINT = "https://aus.neutrinoapi.net/"
+US_GEOFENCE_ENDPOINT = "https://usa.neutrinoapi.net/"
 
 
 class NeutrinoAPIClient:
@@ -146,6 +149,7 @@ class NeutrinoAPIClient:
         * from-value - The value to convert from (e.g. 10.95)
         * from-type - The type of the value to convert from (e.g. USD)
         * to-type - The type to convert to (e.g. EUR)
+        * historical-date - Convert using the rate on a historical date
 
         Link
         ----
@@ -185,7 +189,7 @@ class NeutrinoAPIClient:
         APIResponse
             Neutrino API response object
         """
-        return self.exec_request("GET", "domain-lookup", params, None, 120)
+        return self.exec_request("GET", "domain-lookup", params, None, 300)
 
     def email_validate(self, params) -> APIResponse:
         """
@@ -233,7 +237,7 @@ class NeutrinoAPIClient:
         APIResponse
             Neutrino API response object
         """
-        return self.exec_request("GET", "email-verify", params, None, 120)
+        return self.exec_request("GET", "email-verify", params, None, 300)
 
     def geocode_address(self, params) -> APIResponse:
         """
@@ -340,7 +344,7 @@ class NeutrinoAPIClient:
         APIResponse
             Neutrino API response object
         """
-        return self.exec_request("GET", "host-reputation", params, None, 120)
+        return self.exec_request("GET", "host-reputation", params, None, 300)
 
     def html_clean(self, params, output_file_path):
         """
@@ -445,7 +449,7 @@ class NeutrinoAPIClient:
         APIResponse
             Neutrino API response object
         """
-        return self.exec_request("POST", "image-resize", params, output_file_path, 20)
+        return self.exec_request("POST", "image-resize", params, output_file_path, 30)
 
     def image_watermark(self, params, output_file_path):
         """
@@ -478,7 +482,7 @@ class NeutrinoAPIClient:
         APIResponse
             Neutrino API response object
         """
-        return self.exec_request("POST", "image-watermark", params, output_file_path, 20)
+        return self.exec_request("POST", "image-watermark", params, output_file_path, 30)
 
     def ip_blocklist(self, params) -> APIResponse:
         """
@@ -579,7 +583,7 @@ class NeutrinoAPIClient:
         APIResponse
             Neutrino API response object
         """
-        return self.exec_request("GET", "ip-probe", params, None, 120)
+        return self.exec_request("GET", "ip-probe", params, None, 300)
 
     def phone_playback(self, params) -> APIResponse:
         """
@@ -690,7 +694,7 @@ class NeutrinoAPIClient:
         APIResponse
             Neutrino API response object
         """
-        return self.exec_request("POST", "qr-code", params, output_file_path, 20)
+        return self.exec_request("POST", "qr-code", params, output_file_path, 30)
 
     def sms_verify(self, params) -> APIResponse:
         """

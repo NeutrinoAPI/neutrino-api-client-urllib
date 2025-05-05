@@ -86,6 +86,10 @@ if response.is_ok():
     # The mobile MSIN number (Mobile Subscription Identification Number)
     print("msin:", "'{0}'".format(data.get("msin")))
 
+    # Contains any additional details about the current network such as former network names and mobile
+    # technology utilized
+    print("network-tags:", "'{0}'".format(data.get("network-tags")))
+
     # The number type, possible values are:
     # • mobile
     # • fixed-line

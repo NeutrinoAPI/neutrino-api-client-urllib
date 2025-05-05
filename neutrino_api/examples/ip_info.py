@@ -55,6 +55,9 @@ if response.is_ok():
     # True if this is a IPv6 address. False if IPv4
     print("is-v6:", data.get("is-v6"))
 
+    # The ISO 2-letter language code for the official language spoken in the country
+    print("language-code:", "'{0}'".format(data.get("language-code")))
+
     # Location latitude
     print("latitude:", data.get("latitude"))
 
@@ -67,7 +70,7 @@ if response.is_ok():
     # ISO 3166-2 region code (if detectable)
     print("region-code:", "'{0}'".format(data.get("region-code")))
 
-    # Structure of a ip-info -> timezone response
+    # Structure of timezone
     print("timezone:", data.get("timezone"))
 
     # True if this is a valid IPv4 or IPv6 address

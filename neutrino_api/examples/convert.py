@@ -14,7 +14,13 @@ params = {
     "from_type": "USD",
 
     # The type to convert to (e.g. EUR)
-    "to_type": "EUR"
+    "to_type": "EUR",
+
+    # Convert using the rate on a historical date, accepted date formats are: YYYY-MM-DD, YYYY-MM, YYYY.
+    # Historical rates are stored with daily granularity so the date format YYYY-MM-DD is preferred for
+    # the highest precision. If an invalid date or a date too far into the past is supplied then the API
+    # will respond with 'valid' as false and an empty 'historical-date'
+    "historical_date": ""
 }
 response = client.convert(params)
 if response.is_ok():
@@ -32,6 +38,10 @@ if response.is_ok():
 
     # The value being converted from
     print("from-value:", "'{0}'".format(data.get("from-value")))
+
+    # If a historical conversion was made using the 'historical-date' request option this will contain
+    # the exact date used for the conversion in ISO format: YYYY-MM-DD
+    print("historical-date:", "'{0}'".format(data.get("historical-date")))
 
     # The result of the conversion in string format
     print("result:", "'{0}'".format(data.get("result")))

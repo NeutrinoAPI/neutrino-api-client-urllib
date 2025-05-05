@@ -75,6 +75,9 @@ if response.is_ok():
         # ISO 4217 currency code associated with the country
         print("    currency-code:", "'{0}'".format(item.get("currency-code")))
 
+        # The ISO 2-letter language code for the official language spoken in the country
+        print("    language-code:", "'{0}'".format(item.get("language-code")))
+
         # The location latitude
         print("    latitude:", item.get("latitude"))
 
@@ -110,7 +113,7 @@ if response.is_ok():
         # The state of the location
         print("    state:", "'{0}'".format(item.get("state")))
 
-        # Structure of a ip-info -> timezone response
+        # Structure of timezone
         print("    timezone:", item.get("timezone"))
         print("")
 else:

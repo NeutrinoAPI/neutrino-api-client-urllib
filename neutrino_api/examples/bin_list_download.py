@@ -4,7 +4,7 @@ import sys
 import tempfile
 from neutrino_api.neutrino_api_client import *
 
-output_file_path = tempfile.mkstemp(suffix=".png", prefix="bin-list-download-")[1]
+output_file_path = tempfile.mkstemp(suffix=".csv", prefix="bin-list-download-")[1]
 
 client = NeutrinoAPIClient("<your-user-id>", "<your-api-key>")
 params = {

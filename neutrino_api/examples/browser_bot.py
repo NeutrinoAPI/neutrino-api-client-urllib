@@ -135,7 +135,7 @@ if response.is_ok():
     # then it will be set in 'http-redirect-url' and 'is-http-redirect' will also be true
     print("url:", "'{0}'".format(data.get("url")))
 
-    # Structure of a browser-bot -> url-components response
+    # Structure of url-components
     print("url-components:", data.get("url-components"))
 
     # True if the URL supplied is valid

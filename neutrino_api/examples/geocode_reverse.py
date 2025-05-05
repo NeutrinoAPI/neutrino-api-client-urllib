@@ -54,6 +54,9 @@ if response.is_ok():
     # True if these coordinates map to a real location
     print("found:", data.get("found"))
 
+    # The ISO 2-letter language code for the official language spoken in the country
+    print("language-code:", "'{0}'".format(data.get("language-code")))
+
     # The location latitude
     print("latitude:", data.get("latitude"))
 
@@ -89,7 +92,7 @@ if response.is_ok():
     # The state of the location
     print("state:", "'{0}'".format(data.get("state")))
 
-    # Structure of a ip-info -> timezone response
+    # Structure of timezone
     print("timezone:", data.get("timezone"))
 else:
     print("API Error: {0}, Error Code: {1}, HTTP Status Code: {2}".format(response.error_message, response.error_code, response.status_code), file=sys.stderr)
