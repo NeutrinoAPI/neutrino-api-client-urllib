@@ -7,49 +7,74 @@ from neutrino_api.neutrino_api_client import *
 client = NeutrinoAPIClient("<your-user-id>", "<your-api-key>")
 params = {
 
-    # The user-agent string to lookup. For client hints use the 'UA' header or the JSON data directly
-    # from 'navigator.userAgentData.brands' or 'navigator.userAgentData.getHighEntropyValues()'
+    # The user-agent string to lookup. For client hints this corresponds to the 'sec-ch-ua' header or
+    # you can also pass the JSON data directly from the 'navigator.userAgentData.getHighEntropyValues()'
+    # JavaScript API
     "ua": "Mozilla/5.0 (Linux; Android 11; SM-G9980U1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.101 Mobile Safari/537.36",
 
-    # For client hints this corresponds to the 'UA-Full-Version' header or 'uaFullVersion' from
-    # NavigatorUAData
+    # For client hints this corresponds to the 'sec-ch-ua-full-version' header
     "ua_version": "",
 
-    # For client hints this corresponds to the 'UA-Platform' header or 'platform' from NavigatorUAData
+    # For client hints this corresponds to the 'sec-ch-ua-platform' header
     "ua_platform": "",
 
-    # For client hints this corresponds to the 'UA-Platform-Version' header or 'platformVersion' from
-    # NavigatorUAData
+    # For client hints this corresponds to the 'sec-ch-ua-platform-version' header
     "ua_platform_version": "",
 
-    # For client hints this corresponds to the 'UA-Mobile' header or 'mobile' from NavigatorUAData
+    # For client hints this corresponds to the 'sec-ch-ua-mobile' header
     "ua_mobile": "",
 
-    # For client hints this corresponds to the 'UA-Model' header or 'model' from NavigatorUAData. You
-    # can also use this parameter to lookup a device directly by its model name, model code or hardware
-    # code, on android you can get the model name from:
-    # https://developer.android.com/reference/android/os/Build.html#MODEL
+    # For client hints this corresponds to the 'sec-ch-ua-model' header. You can also use this parameter
+    # to lookup a device directly by its model name, model code or hardware code, on android you can get
+    # the model name from: https://developer.android.com/reference/android/os/Build.html#MODEL
     "device_model": "",
 
-    # This parameter is only used in combination with 'device-model' when doing direct device lookups
-    # without any user-agent data. Set this to the brand or manufacturer name, this is required for
-    # accurate device detection with ambiguous model names. On android you can get the device brand
-    # from: https://developer.android.com/reference/android/os/Build#MANUFACTURER
-    "device_brand": ""
+    # This parameter is only used in combination with 'device-model' for direct device lookups without
+    # any user-agent data. Set this to the brand or manufacturer name, this is required for accurate
+    # device detection with ambiguous model names. On android you can get the device brand from:
+    # https://developer.android.com/reference/android/os/Build#MANUFACTURER
+    "device_brand": "",
+
+    # For client hints this corresponds to the 'sec-ch-ua-arch' header
+    "ua_arch": "",
+
+    # For client hints this corresponds to the 'sec-ch-ua-bitness' header
+    "ua_bitness": "",
+
+    # For client hints this corresponds to the 'sec-ch-ua-form-factors' header
+    "ua_form_factors": ""
 }
 response = client.ua_lookup(params)
 if response.is_ok():
     data = response.data
     print("API Response OK:")
 
-    # If the client is a web browser which underlying browser engine does it use
+    # For web browsers which underlying browser engine does it use
     print("browser-engine:", "'{0}'".format(data.get("browser-engine")))
 
-    # If the client is a web browser which year was this browser version released
+    # The web browser name. For Apps/WebViews this will be the name of the underlying browser used,
+    # otherwise this is identical to the 'name' field
+    print("browser-name:", "'{0}'".format(data.get("browser-name")))
+
+    # For web browsers which year was this browser version released
     print("browser-release:", "'{0}'".format(data.get("browser-release")))
+
+    # For web browsers the ISO date this browser version was released
+    print("browser-release-date:", "'{0}'".format(data.get("browser-release-date")))
+
+    # The browsers full version. For Apps/WebViews this will be the full version of the underlying app
+    # browser, otherwise this is identical to the 'version' field
+    print("browser-version:", "'{0}'".format(data.get("browser-version")))
+
+    # The browsers major version. For Apps/WebViews this will be the major version of the underlying app
+    # browser, otherwise this is identical to the 'version-major' field
+    print("browser-version-major:", "'{0}'".format(data.get("browser-version-major")))
 
     # The device brand / manufacturer
     print("device-brand:", "'{0}'".format(data.get("device-brand")))
+
+    # The device display height in millimeters
+    print("device-height-mm:", data.get("device-height-mm"))
 
     # The device display height in CSS 'px'
     print("device-height-px:", data.get("device-height-px"))
@@ -76,16 +101,32 @@ if response.is_ok():
     # The device display resolution in physical pixels (e.g. 720x1280)
     print("device-resolution:", "'{0}'".format(data.get("device-resolution")))
 
+    # The device display width in millimeters
+    print("device-width-mm:", data.get("device-width-mm"))
+
     # The device display width in CSS 'px'
     print("device-width-px:", data.get("device-width-px"))
+
+    # True if this user agent is from a mobile or desktop app. You can distinguish the app name and
+    # version from the 'name' and 'version-*' fields and the underlying browser/WebView from the
+    # 'browser-*' fields
+    print("is-app:", data.get("is-app"))
+
+    # For web browsers is the version up-to-date with the current stable release (+/- one version)
+    print("is-current:", data.get("is-current"))
 
     # Is this a mobile device (e.g. a phone or tablet)
     print("is-mobile:", data.get("is-mobile"))
 
-    # Is this a WebView / embedded software client
+    # For chrome/chromium based browsers is this user agent string frozen and requires client hints for
+    # more accurate details. For more information see user-agent reduction and to test a browser for
+    # client hints go to the client hints analyzer test page
+    print("is-ua-frozen:", data.get("is-ua-frozen"))
+
+    # Is this a WebView or embedded web browser. This includes mobile and desktop apps using WebViews
     print("is-webview:", data.get("is-webview"))
 
-    # The client software name
+    # The client software name / user agent name / web browser name
     print("name:", "'{0}'".format(data.get("name")))
 
     # The full operating system name
@@ -116,10 +157,10 @@ if response.is_ok():
     # The user agent string
     print("ua:", "'{0}'".format(data.get("ua")))
 
-    # The client software full version
+    # The user agent software full version
     print("version:", "'{0}'".format(data.get("version")))
 
-    # The client software major version
+    # The user agent software major version
     print("version-major:", "'{0}'".format(data.get("version-major")))
 else:
     print("API Error: {0}, Error Code: {1}, HTTP Status Code: {2}".format(response.error_message, response.error_code, response.status_code), file=sys.stderr)

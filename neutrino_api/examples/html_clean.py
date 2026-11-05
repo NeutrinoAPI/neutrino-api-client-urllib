@@ -10,10 +10,11 @@ client = NeutrinoAPIClient("<your-user-id>", "<your-api-key>")
 params = {
 
     # The level of sanitization, possible values are: plain-text: reduce the content to plain text only
-    # (no HTML tags at all) simple-text: allow only very basic text formatting tags like b, em, i,
-    # strong, u basic-html: allow advanced text formatting and hyper links basic-html-with-images: same
-    # as basic html but also allows image tags advanced-html: same as basic html with images but also
-    # allows many more common HTML tags like table, ul, dl, pre
+    # (no HTML tags at all) plain-text-markdown: reduce the content to plain text only but also convert
+    # HTML links and lists into makrdown style text simple-text: allow only very basic text formatting
+    # tags like b, em, i, strong, u basic-html: allow advanced text formatting and hyper links
+    # basic-html-with-images: same as basic html but also allows image tags advanced-html: same as basic
+    # html with images but also allows many more common HTML tags like table, ul, dl, pre
     "output_type": "plain-text",
 
     # The HTML content. This can be either a URL to load from, a file upload (multipart/form-data) or an

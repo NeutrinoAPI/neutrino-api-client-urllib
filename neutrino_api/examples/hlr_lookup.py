@@ -7,7 +7,8 @@ from neutrino_api.neutrino_api_client import *
 client = NeutrinoAPIClient("<your-user-id>", "<your-api-key>")
 params = {
 
-    # A phone number
+    # A phone number. This can be in international format (E.164) or local format. If passing local
+    # format you must also set either the 'country-code' option as well
     "number": "+12106100045",
 
     # ISO 2-letter country code, assume numbers are based in this country. If not set numbers are

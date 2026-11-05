@@ -75,6 +75,10 @@ if response.is_ok():
     # Is this a prepaid or prepaid reloadable card
     print("is-prepaid:", data.get("is-prepaid"))
 
+    # Indicates the card can be reloaded with funds. This is mostly useful to distinguish between
+    # non-reloadable and reloadable prepaid card types
+    print("is-reloadable:", data.get("is-reloadable"))
+
     # The card issuer
     print("issuer:", "'{0}'".format(data.get("issuer")))
 

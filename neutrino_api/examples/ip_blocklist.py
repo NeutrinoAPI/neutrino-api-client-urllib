@@ -35,12 +35,19 @@ if response.is_ok():
     #   organization
     # • malware - IP is currently involved in distributing or is running malware
     # • spyware - IP is currently involved in distributing or is running spyware
-    # • spider - IP is running a hostile web spider / web crawler
+    # • spider - IP is running a hostile web spider (deprecated but kept for backwards compatibility
+    #   instead use UA/IP lookups for spider detection)
     # • dshield - IP has been flagged as a significant attack source by DShield (dshield.org)
     print("blocklists:", data.get("blocklists"))
 
     # The CIDR address for this listing (only set if the IP is listed)
     print("cidr:", "'{0}'".format(data.get("cidr")))
+
+    # The unix time when this IP was first seen on any blocklist
+    print("first-seen:", data.get("first-seen"))
+
+    # The ISO date when this IP was first seen on any blocklist
+    print("first-seen-date:", "'{0}'".format(data.get("first-seen-date")))
 
     # The IP address
     print("ip:", "'{0}'".format(data.get("ip")))
@@ -70,7 +77,8 @@ if response.is_ok():
     # IP address is hosting a spam bot, comment spamming or any other spamming type software
     print("is-spam-bot:", data.get("is-spam-bot"))
 
-    # IP is running a hostile web spider / web crawler
+    # IP is running a hostile web spider (deprecated but kept for backwards compatibility instead use
+    # UA/IP lookups for spider detection)
     print("is-spider:", data.get("is-spider"))
 
     # IP is involved in distributing or is running spyware
@@ -85,6 +93,9 @@ if response.is_ok():
     # The unix time when this IP was last seen on any blocklist. IPs are automatically removed after 7
     # days therefor this value will never be older than 7 days
     print("last-seen:", data.get("last-seen"))
+
+    # The ISO date when this IP was last seen on any blocklist
+    print("last-seen-date:", "'{0}'".format(data.get("last-seen-date")))
 
     # The number of blocklists the IP is listed on
     print("list-count:", data.get("list-count"))
@@ -102,6 +113,10 @@ if response.is_ok():
         # The sensor ID. This is a permanent and unique ID for each sensor
         print("    id:", item.get("id"))
         print("")
+
+    # The total number of times this IP has been detected by any sensor, higher numbers indicate higher
+    # levels of malicious activity
+    print("total-hits:", data.get("total-hits"))
 else:
     print("API Error: {0}, Error Code: {1}, HTTP Status Code: {2}".format(response.error_message, response.error_code, response.status_code), file=sys.stderr)
     if response.error_cause:

@@ -1,6 +1,6 @@
 """Neutrino API Python client using native urllib HTTP library"""
 
-__version__ = '4.7.1'
+__version__ = '4.7.5'
 
 from socket import timeout
 from ssl import SSLError
@@ -114,7 +114,7 @@ class NeutrinoAPIClient:
 
     def browser_bot(self, params) -> APIResponse:
         """
-        Browser bot can extract content, interact with keyboard and mouse events, and execute JavaScript on a website
+        Automate a real web browser to extract content, interact with, or execute JavaScript on any website
 
         The parameters this API accepts are:
         * delay - Delay in seconds to wait before capturing any page data
@@ -143,7 +143,7 @@ class NeutrinoAPIClient:
 
     def convert(self, params) -> APIResponse:
         """
-        A currency and unit conversion tool
+        Convert currency and other numerical units between each other
 
         The parameters this API accepts are:
         * from-value - The value to convert from (e.g. 10.95)
@@ -217,7 +217,7 @@ class NeutrinoAPIClient:
 
     def email_verify(self, params) -> APIResponse:
         """
-        SMTP based email address verification
+        Perform in-depth SMTP based email address verification
 
         The parameters this API accepts are:
         * email - An email address
@@ -241,19 +241,22 @@ class NeutrinoAPIClient:
 
     def geocode_address(self, params) -> APIResponse:
         """
-        Geocode an address, partial address or just the name of a place
+        Geocode an address, partial address or the name of a place
 
         The parameters this API accepts are:
         * address - The full address
-        * house-number - The house/building number to locate
-        * street - The street/road name to locate
-        * city - The city/town name to locate
-        * county - The county/region name to locate
-        * state - The state name to locate
-        * postal-code - The postal code to locate
-        * country-code - Limit result to this country (the default is no country bias)
+        * house-number - The house/building number to locate (for structured address searches)
+        * street - The street/road name to locate (for structured address searches)
+        * city - The city/town name to locate (for structured address searches)
+        * county - The county/region name to locate (for structured address searches)
+        * state - The state name to locate (for structured address searches)
+        * postal-code - The postal code to locate (for structured address searches)
+        * country-code - Prefer results from this country code (the default is no country bias)
+        * country-codes - Prefer results from this list of country codes (space or comma separated values)
         * language-code - The language to display results in
+        * auto-complete - Enable auto-complete for search-as-you-type and search suggestions
         * fuzzy-search - If no matches are found for the given address
+        * limit - Limit search results to this many locations (between 1 and a maximum of 32)
 
         Link
         ----
@@ -280,6 +283,7 @@ class NeutrinoAPIClient:
         * longitude - The location longitude in decimal degrees format
         * language-code - The language to display results in
         * zoom - The zoom level to respond with: address - the most precise address available street - the street level city - the city level state - the state level country - the country level 
+        * geohash - Reverse lookup by a geohash instead of using latitude and longitude
 
         Link
         ----
@@ -299,7 +303,7 @@ class NeutrinoAPIClient:
 
     def hlr_lookup(self, params) -> APIResponse:
         """
-        Connect to the global mobile cellular network and retrieve the status of a mobile device
+        Connect to the global mobile cellular network and retrieve the status of a mobile phone number
 
         The parameters this API accepts are:
         * number - A phone number
@@ -323,7 +327,7 @@ class NeutrinoAPIClient:
 
     def host_reputation(self, params) -> APIResponse:
         """
-        Check the reputation of an IP address, domain name or URL against a comprehensive list of blacklists and blocklists
+        Check the reputation of an IP address, domain name or URL against a comprehensive list of blocklists
 
         The parameters this API accepts are:
         * host - An IP address
@@ -486,7 +490,7 @@ class NeutrinoAPIClient:
 
     def ip_blocklist(self, params) -> APIResponse:
         """
-        The IP Blocklist API will detect potentially malicious or dangerous IP addresses
+        Detect potentially malicious or dangerous IP addresses
 
         The parameters this API accepts are:
         * ip - An IPv4 or IPv6 address
@@ -510,7 +514,7 @@ class NeutrinoAPIClient:
 
     def ip_blocklist_download(self, params, output_file_path):
         """
-        This API is a direct feed to our IP blocklist data
+        Download a direct feed to our IP blocklist data
 
         The parameters this API accepts are:
         * format - The data format
@@ -564,7 +568,7 @@ class NeutrinoAPIClient:
 
     def ip_probe(self, params) -> APIResponse:
         """
-        Execute a realtime network probe against an IPv4 or IPv6 address
+        Execute a realtime network probe against an IP address
 
         The parameters this API accepts are:
         * ip - An IPv4 or IPv6 address
@@ -591,8 +595,8 @@ class NeutrinoAPIClient:
 
         The parameters this API accepts are:
         * number - The phone number to call
-        * limit - Limit the total number of calls allowed to the supplied phone number
         * audio-url - A URL to a valid audio file
+        * limit - Limit the total number of calls allowed to the supplied phone number
         * limit-ttl - Set the TTL in number of days that the 'limit' option will remember a phone number (the default is 1 day and the maximum is 365 days)
 
         Link
@@ -609,7 +613,7 @@ class NeutrinoAPIClient:
         APIResponse
             Neutrino API response object
         """
-        return self.exec_request("POST", "phone-playback", params, None, 30)
+        return self.exec_request("GET", "phone-playback", params, None, 30)
 
     def phone_validate(self, params) -> APIResponse:
         """
@@ -642,12 +646,12 @@ class NeutrinoAPIClient:
 
         The parameters this API accepts are:
         * number - The phone number to send the verification code to
-        * country-code - ISO 2-letter country code
-        * security-code - Pass in your own security code
-        * language-code - The language to playback the verification code in
         * code-length - The number of digits to use in the security code (between 4 and 12)
-        * limit - Limit the total number of calls allowed to the supplied phone number
+        * security-code - Pass in your own security code
         * playback-delay - The delay in milliseconds between the playback of each security code
+        * country-code - ISO 2-letter country code
+        * language-code - The language to playback the verification code in
+        * limit - Limit the total number of calls allowed to the supplied phone number
         * limit-ttl - Set the TTL in number of days that the 'limit' option will remember a phone number (the default is 1 day and the maximum is 365 days)
 
         Link
@@ -664,11 +668,11 @@ class NeutrinoAPIClient:
         APIResponse
             Neutrino API response object
         """
-        return self.exec_request("POST", "phone-verify", params, None, 30)
+        return self.exec_request("GET", "phone-verify", params, None, 30)
 
     def qr_code(self, params, output_file_path):
         """
-        Generate a QR code as a PNG image
+        Generate a QR or C128 code as a PNG image
 
         The parameters this API accepts are:
         * code-format - The barcode format to output
@@ -702,13 +706,13 @@ class NeutrinoAPIClient:
 
         The parameters this API accepts are:
         * number - The phone number to send a verification code to
-        * country-code - ISO 2-letter country code
-        * security-code - Pass in your own security code
-        * language-code - The language to send the verification code in
         * code-length - The number of digits to use in the security code (must be between 4 and 12)
+        * security-code - Pass in your own security code
+        * country-code - ISO 2-letter country code
+        * language-code - The language to send the verification code in
         * limit - Limit the total number of SMS allowed to the supplied phone number
-        * brand-name - Set a custom brand or product name in the verification message
         * limit-ttl - Set the TTL in number of days that the 'limit' option will remember a phone number (the default is 1 day and the maximum is 365 days)
+        * brand-name - Set a custom brand or product name in the verification message
 
         Link
         ----
@@ -724,7 +728,7 @@ class NeutrinoAPIClient:
         APIResponse
             Neutrino API response object
         """
-        return self.exec_request("POST", "sms-verify", params, None, 30)
+        return self.exec_request("GET", "sms-verify", params, None, 30)
 
     def ua_lookup(self, params) -> APIResponse:
         """
@@ -732,12 +736,15 @@ class NeutrinoAPIClient:
 
         The parameters this API accepts are:
         * ua - The user-agent string to lookup
-        * ua-version - For client hints this corresponds to the 'UA-Full-Version' header or 'uaFullVersion' from NavigatorUAData
-        * ua-platform - For client hints this corresponds to the 'UA-Platform' header or 'platform' from NavigatorUAData
-        * ua-platform-version - For client hints this corresponds to the 'UA-Platform-Version' header or 'platformVersion' from NavigatorUAData
-        * ua-mobile - For client hints this corresponds to the 'UA-Mobile' header or 'mobile' from NavigatorUAData
-        * device-model - For client hints this corresponds to the 'UA-Model' header or 'model' from NavigatorUAData
-        * device-brand - This parameter is only used in combination with 'device-model' when doing direct device lookups without any user-agent data
+        * ua-version - For client hints this corresponds to the 'sec-ch-ua-full-version' header
+        * ua-platform - For client hints this corresponds to the 'sec-ch-ua-platform' header
+        * ua-platform-version - For client hints this corresponds to the 'sec-ch-ua-platform-version' header
+        * ua-mobile - For client hints this corresponds to the 'sec-ch-ua-mobile' header
+        * device-model - For client hints this corresponds to the 'sec-ch-ua-model' header
+        * device-brand - This parameter is only used in combination with 'device-model' for direct device lookups without any user-agent data
+        * ua-arch - For client hints this corresponds to the 'sec-ch-ua-arch' header
+        * ua-bitness - For client hints this corresponds to the 'sec-ch-ua-bitness' header
+        * ua-form-factors - For client hints this corresponds to the 'sec-ch-ua-form-factors' header
 
         Link
         ----
